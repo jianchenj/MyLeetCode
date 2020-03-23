@@ -28,20 +28,35 @@ class LeetCode3 {
     pwwkew
      */
     fun lengthOfLongestSubstring(s: String): Int {
-        val n = s.length
-        var ans = 0
-        val map = HashMap<Char, Int>()//以char为key， int为char出现的位置
-        //滑动窗口为[i, j]
+        val length = s.length
         var i = 0
         var j = 0
-        while (j < n) {
-            if (map.containsKey(s[j])) {//发现重复
-                i = max(map[s[j]]!!, i)//窗口左边移到这个重复的char的位置
+        var result = 0
+        val map: HashMap<Char, Int> = HashMap()//以char为key，保存出现该char的位置
+        while (j < length) {
+            if (map.containsKey(s[j])) {//发现重复，将窗口左边移到改位置
+                i = max(map[s[j]]!!, i)
             }
-            ans = max(ans, j - i + 1)
+            result = max(result, j - i + 1)//取较长的答案
             map[s[j]] = j + 1
-            j++//窗口右边继续向右
+            j++
         }
-        return ans
+        return result
+
+//        val n = s.length
+//        var ans = 0
+//        val map = HashMap<Char, Int>()//以char为key， int为char出现的位置
+//        //滑动窗口为[i, j]
+//        var i = 0
+//        var j = 0
+//        while (j < n) {
+//            if (map.containsKey(s[j])) {//发现重复
+//                i = max(map[s[j]]!!, i)//窗口左边移到这个重复的char的位置
+//            }
+//            ans = max(ans, j - i + 1)
+//            map[s[j]] = j + 1
+//            j++//窗口右边继续向右
+//        }
+//        return ans
     }
 }
